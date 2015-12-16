@@ -15,7 +15,7 @@ use Spryker\Zed\Development\DevelopmentConfig;
 /**
  * @method DevelopmentConfig getConfig()
  */
-class DevelopmentDependencyContainer extends AbstractBusinessFactory
+class DevelopmentBusinessFactory extends AbstractBusinessFactory
 {
 
     /**

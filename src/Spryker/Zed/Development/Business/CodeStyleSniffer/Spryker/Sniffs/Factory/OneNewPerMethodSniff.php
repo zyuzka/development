@@ -4,7 +4,7 @@
  * (c) Spryker Systems GmbH copyright protected
  */
 
-namespace Spryker\Sniffs\DependencyContainer;
+namespace Spryker\Sniffs\Factory;
 
 class OneNewPerMethodSniff implements \PHP_CodeSniffer_Sniff
 {
@@ -27,7 +27,7 @@ class OneNewPerMethodSniff implements \PHP_CodeSniffer_Sniff
      */
     public function process(\PHP_CodeSniffer_File $phpCsFile, $stackPointer)
     {
-        if ($this->isDependencyContainer($phpCsFile) && $this->hasMoreThenOneNewInMethod($phpCsFile, $stackPointer)) {
+        if ($this->isFactory($phpCsFile) && $this->hasMoreThenOneNewInMethod($phpCsFile, $stackPointer)) {
             $classMethod = $this->getClassMethod($phpCsFile, $stackPointer);
             $phpCsFile->addError(
                 $classMethod . ' contains more then one new. Fix this by extract a method.',
@@ -73,7 +73,7 @@ class OneNewPerMethodSniff implements \PHP_CodeSniffer_Sniff
      *
      * @return bool
      */
-    protected function isDependencyContainer(\PHP_CodeSniffer_File $phpCsFile)
+    protected function isFactory(\PHP_CodeSniffer_File $phpCsFile)
     {
         $className = $this->getClassName($phpCsFile);
 
