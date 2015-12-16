@@ -4,7 +4,7 @@
  * (c) Spryker Systems GmbH copyright protected
  */
 
-class InValidDependencyContainer
+class InValidFactory
 {
 
     public function fooBar()
