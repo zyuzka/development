@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
@@ -13,9 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @method \Spryker\Zed\Development\Business\DevelopmentFacadeInterface getFacade()
  */
-class GenerateIdeAutoCompletionConsole extends Console
+class GenerateGlueIdeAutoCompletionConsole extends Console
 {
-    const COMMAND_NAME = 'dev:ide:generate-auto-completion';
+    const COMMAND_NAME = 'dev:ide:generate-glue-auto-completion';
 
     /**
      * @return void
@@ -25,33 +26,19 @@ class GenerateIdeAutoCompletionConsole extends Console
         parent::configure();
 
         $this->setName(static::COMMAND_NAME);
-        $this->setDescription('Generate IDE auto completion files.');
+        $this->setDescription('Generate IDE auto completion files for Glue.');
     }
 
     /**
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      *
-     * @return int
+     * @return void
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $dependingCommands = [
-            GenerateYvesIdeAutoCompletionConsole::COMMAND_NAME,
-            GenerateZedIdeAutoCompletionConsole::COMMAND_NAME,
-            GenerateClientIdeAutoCompletionConsole::COMMAND_NAME,
-            GenerateServiceIdeAutoCompletionConsole::COMMAND_NAME,
-            GenerateGlueIdeAutoCompletionConsole::COMMAND_NAME,
-        ];
+        $this->getFacade()->generateGlueIdeAutoCompletion();
 
-        foreach ($dependingCommands as $commandName) {
-            $this->runDependingCommand($commandName);
-
-            if ($this->hasError()) {
-                return $this->getLastExitCode();
-            }
-        }
-
-        return $this->getLastExitCode();
+        $this->info('Generated Glue IDE auto-completion files');
     }
 }
